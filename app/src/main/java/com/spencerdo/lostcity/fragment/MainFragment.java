@@ -117,7 +117,18 @@ public class MainFragment extends BaseFragment {
     if (sum == 0 && multiplier == 1) {
       handicap = 0;
     }
-    return (sum - handicap) * multiplier;
+
+    return (sum - handicap + getExtraPoints(views)) * multiplier;
+  }
+
+  private int getExtraPoints(List<NumberView> views) {
+    int count = 0;
+    for (NumberView v : views) {
+      if (v.isSelected()) {
+        count++;
+      }
+    }
+    return count >= 8 ? 20 : 0;
   }
 
   @Override public void onDestroy() {
